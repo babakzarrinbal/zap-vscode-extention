@@ -20,9 +20,9 @@ function activate(context) {
 	let disposable = vscode.commands.registerCommand('extention.zap', function () {
 		
 		vscode.window.showInformationMessage('Zap welcome to you!');
-		context.subscriptions.push(vscode.commands.registerCommand('<publisher>.<your-extension-name>.panel.registration', () => {
+		context.subscriptions.push(vscode.commands.registerCommand('<publisher>.zap.panel.registration', () => {
 			return {
-				id: '<your-extension-name>',
+				id: 'zap',
 				title: 'Extension actions',
 				description: 'Actions for testing purposes only.',
 				actions: [{
