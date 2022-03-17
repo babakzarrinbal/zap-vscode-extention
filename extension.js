@@ -20,13 +20,14 @@ function activate(context) {
 	let disposable = vscode.commands.registerCommand('extention.zap', function () {
 		
 		vscode.window.showInformationMessage('Zap welcome to you!');
-		context.subscriptions.push(vscode.commands.registerCommand('<publisher>.zap.panel.registration', () => {
+		
+		context.subscriptions.push(vscode.commands.registerCommand('zap.panel.registration', () => {
 			return {
 				id: 'zap',
-				title: 'Extension actions',
+				title: 'ZAP actions',
 				description: 'Actions for testing purposes only.',
 				actions: [{
-					title: 'Action 1',
+					title: 'Click me!',
 					command: 'vscode-extension-panel.panel.test',
 					data: true,
 					type: "checkbox"
@@ -40,6 +41,7 @@ function activate(context) {
 		})
 	);
 	});
+	
 
 	context.subscriptions.push(disposable);
 }
