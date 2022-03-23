@@ -4,11 +4,6 @@
   "description": "ZAP is a generic templating engine. Examples are provided for how to generate artifacts for the C language environment, but one could easily add new templates for other language environments, such as C++, java, node.js, python or any other.",
   "version": "0.0.1",
   "publisher": "shayankamandi",
-  "extensionDependencies": [
-    "eliostruyf.vscode-extension-panel"
-  ],
-  
-
   "engines": {
     "vscode": "^1.65.0"
   },
@@ -17,8 +12,7 @@
   ],
   "activationEvents": [
     "onCommand:extention.zap",
-    "workspaceContains:.editorconfig",
-    "onStartupFinished"
+    "workspaceContains:.editorconfig"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -26,48 +20,39 @@
       {
         "command": "extention.zap",
         "title": "Open Zap",
-        "icon": "../web/img/refresh-svgrepo-com.svg"
+        "icon": "zap.svg"
       }
-    
     ],
-    "menus": {
-      "view/title": [
-          {
-              "command": "extention.zap",
-              "when": "view == nodeDependencies",
-              "group": "navigation"
-          }
-      ]
-  },
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "package-explorer",
-          "title": "Package Explorer",
-          "icon": "../web/img/refresh-svgrepo-com.svg"
+          "id": "zapextension",
+          "title": "Zap",
+          "icon": "zap.svg"
         }
       ]
     },
     "views": {
-      "tree-view": [
-        {
-            "id": "extention",
-            "name": "Node Dependencies"
-        }
-    ]
+      "zapextension": [{
+        "id": "zap-scripts",
+        "name": "Scripts"
+      },{
+        "id": "zap-configurations",
+        "name": "Configurations"
+      }]
     },
     "viewsWelcome": [
       {
-        "view": "scm",
-        "contents": "ZAP is a generic templating engine. Examples are provided for how to generate artifacts for the C language environment, but one could easily add new templates for other language environments, such as C++, java, node.js, python or any other."
-       }
+        "view": "zapextension",
+        "contents": "ZAP is a generic templating engine. Examples are provided for viewsContainersow to generate artifacts for the C language environment, but one could easily add new templates for other language environments, such as C++, java, node.js, python or any other. \n[Open Folder](command:vscode.openFolder)\n",
+        "when": "true"
+      }
     ]
   },
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run lint",
     "test": "`node ./test/runTest.js`"
-    
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
@@ -78,6 +63,7 @@
     "concurrently": "^7.0.0",
     "eslint": "^8.9.0",
     "glob": "^7.2.0",
+    "lodash": "^4.17.21",
     "mocha": "^9.2.1",
     "typescript": "^4.5.5"
   }
