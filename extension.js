@@ -13,7 +13,7 @@ function activate(context) {
   // This line of code will only be executed once when your extension is activated
   console.log("Congratulations, your extension Zap is now active!");
 
-  
+ 
 
   // The command has been defined in the package.json file
   // Now provide the implementation of the c  ommand with  registerCommand
@@ -25,7 +25,7 @@ function activate(context) {
     function () {
       vscode.window.showInformationMessage("Zap welcome to you!");
       vscode.window.setStatusBarMessage("Zap");
-      
+    
     }
   );
 
