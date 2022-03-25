@@ -2,6 +2,8 @@
 	"compilerOptions": {
 		"module": "commonjs",
 		"target": "ES2020",
+		"resolveJsonModule": true,
+		"moduleResolution": "node",
 		"checkJs": true,  /* Typecheck .js files. */
 		"lib": [
 			"ES2020"
