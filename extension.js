@@ -27,7 +27,7 @@ function activate(context) {
       } catch (e) {
         return vscode.window.showInformationMessage("can't load package.json");
       }
-      console.log(json.scripts);
+      vscode.window.showInformationMessage("adding commands: ", Object.keys(json.scripts).join(", "));
     }
   );
 
@@ -46,7 +46,8 @@ function activate(context) {
   );
 
   // context.subscriptions.push(disposable,);
-  context.subscriptions.push(getconfig, disposable);
+  context.subscriptions.push(getconfig,);
+  context.subscriptions.push(disposable,);
 }
 
 // this method is called when your extension is deactivated
