@@ -29,13 +29,12 @@ function activate(context) {
         return vscode.window.showInformationMessage("can't load package.json");
       }
       let items=  [];
-  
+      
       for (let key of Object.keys(json.scripts)){
         items.push({ 
           label: key, 
           description: key});
       }
-      
       vscode.window.showQuickPick(items).then(selection => {
         // the user canceled the selection
         vscode.window.showInformationMessage(
@@ -43,13 +42,13 @@ function activate(context) {
           selection.label
         );
         let channel = vscode.window.createOutputChannel(selection.label);
-        let a = exec('pwd', {
+        let runningcommand = exec('pwd', {
           cwd: path
         }, function(error, stdout, stderr) {
-          
+          console.log(error, stdout, stderr)
           channel.appendLine(error.toString())
         });
-        a.on('message',m=>channel.append(m.toString()))
+        runningcommand.on('message',m=>channel.append(m.toString()))
       });
 
     }
