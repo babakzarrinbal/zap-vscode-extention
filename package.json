@@ -20,12 +20,12 @@
     "commands": [
       {
         "command": "extention.zap",
-        "title": "Open Zap",
+        "title": "zap:run script",
         "icon": "zap.svg"
       },
       {
         "command": "extention.zapopenPackageJsonFile",
-        "title": "get config for Zap",
+        "title": "zap:load script json",
         "icon": "zap.svg"
       }
     ],
@@ -43,19 +43,9 @@
         {
           "id": "zap-scripts",
           "name": "Scripts"
-        },
-        {
-          "id": "zap-configurations",
-          "name": "Configurations"
         }
       ]
     },
-    "viewsWelcome": [
-      {
-        "view": "zap-scripts",
-        "contents": "to run the scripts you need to select the package.json file of zap project\n[Open package.json file](command:workbench.action.files.openLocalFile)\n"
-      }
-    ],
     "configuration": [
       {
         "title": "zap",
@@ -63,7 +53,7 @@
           "zap.packageJsonFilePath": {
             "type": "string",
             "default": "",
-            "description": "Specifies the folder path containing the tsserver and lib*.d.ts files to use."
+            "description": "Specifies the location of json file or folder that contains package.json."
           }
         }
       }
