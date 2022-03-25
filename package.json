@@ -12,6 +12,7 @@
   ],
   "activationEvents": [
     "onCommand:extention.zap",
+    "onCommand:extention.zapopenPackageJsonFile",
     "workspaceContains:.editorconfig"
   ],
   "main": "./extension.js",
@@ -20,6 +21,11 @@
       {
         "command": "extention.zap",
         "title": "Open Zap",
+        "icon": "zap.svg"
+      },
+      {
+        "command": "extention.zapopenPackageJsonFile",
+        "title": "get config for Zap",
         "icon": "zap.svg"
       }
     ],
@@ -33,21 +39,35 @@
       ]
     },
     "views": {
-      "zapextension": [{
-        "id": "zap-scripts",
-        "name": "Scripts"
-      },{
-        "id": "zap-configurations",
-        "name": "Configurations"
-      }]
+      "zapextension": [
+        {
+          "id": "zap-scripts",
+          "name": "Scripts"
+        },
+        {
+          "id": "zap-configurations",
+          "name": "Configurations"
+        }
+      ]
     },
     "viewsWelcome": [
       {
         "view": "zap-scripts",
-        "contents": "\n[Open File](command:workbench.action.files.openLocalFile)\n"
+        "contents": "to run the scripts you need to select the package.json file of zap project\n[Open package.json file](command:workbench.action.files.openLocalFile)\n"
       }
-      ]
-    
+    ],
+    "configuration": [
+      {
+        "title": "zap",
+        "properties": {
+          "zap.packageJsonFilePath": {
+            "type": "string",
+            "default": "",
+            "description": "Specifies the folder path containing the tsserver and lib*.d.ts files to use."
+          }
+        }
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
