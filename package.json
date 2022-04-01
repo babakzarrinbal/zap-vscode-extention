@@ -13,7 +13,11 @@
   "activationEvents": [
     "onCommand:extention.zap",
     "onCommand:extention.zapopenPackageJsonFile",
-    "workspaceContains:.editorconfig"
+    "workspaceContains:.editorconfig",
+    "onView:zapsidebar"
+  ],
+  "enabledApiProposals": [
+    "contribViewsWelcome"
   ],
   "main": "./extension.js",
   "contributes": {
@@ -36,16 +40,31 @@
           "title": "Zap",
           "icon": "zap.svg"
         }
+      ],
+      "panel": [
+        {
+          "id": "zapextension",
+          "title": "HI This is a Panel",
+          "icon": "zap.svg"
+        } 
       ]
     },
     "views": {
       "zapextension": [
         {
-          "id": "zap-scripts",
+          "id": "zapscripts",
           "name": "Scripts"
+          
+
         }
       ]
     },
+    "viewsWelcome": [
+      {
+        "view": "zapscripts",
+        "contents": "Scripts:"
+      }
+    ],
     "configuration": [
       {
         "title": "zap",

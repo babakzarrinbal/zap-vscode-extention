@@ -2,7 +2,11 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require("vscode");
 var path = require("path");
-const { exec } = require("child_process");
+const workspace = vscode.workspace;
+const window = vscode.window;
+var exec = require('child_process').exec
+
+
 // const btn = json.contributes.viewsWelcome(view: string; context:"\n[Open File](command:workbench.action.files.openLocalFile)\n" );
 
 /**
@@ -12,7 +16,7 @@ function activate(context) {
   let getconfig = vscode.commands.registerCommand(
     "extention.zapopenPackageJsonFile",
     function () {
-      let path = vscode.workspace
+      let path = workspace
         .getConfiguration("zap")
         .get("packageJsonFilePath");
       path = path.replaceAll("\\", "/");
@@ -26,34 +30,47 @@ function activate(context) {
       try {
         json = require(path+"/package.json");
       } catch (e) {
-        return vscode.window.showInformationMessage("can't load package.json");
+        return window.showInformationMessage("can't load package.json");
       }
-      let items=  [];
+      let items=  []; 
       
-      for (let key of Object.keys(json.scripts)){
+    //  console.log(Object.keys(json.view.);
+      console.log(Object.keys(json.viewsWelcome.zapextension.zap));
+       for ( const key of Object.keys(json.scripts)){
         items.push({ 
           label: key, 
-          description: key});
-      }
-      vscode.window.showQuickPick(items).then(selection => {
+          description: key
+        });
+        }
+     
+      window.showQuickPick(items).then(selection => {
         // the user canceled the selection
-        vscode.window.showInformationMessage(
+        window.showInformationMessage(
           "running commands: ",
           selection.label
         );
-        let channel = vscode.window.createOutputChannel(selection.label);
-        let runningcommand = exec('pwd', {
+      
+        let channel = window.createOutputChannel(selection.label);
+          let runningcommand = exec('pwd', {
           cwd: path
         }, function(error, stdout, stderr) {
-          console.log(error, stdout, stderr)
+          console.log(error, stdout,stderr) 
           channel.appendLine(error.toString())
+          channel.show();
         });
-        runningcommand.on('message',m=>channel.append(m.toString()))
+
+        runningcommand.on('message', m=>channel.appendLine(m.toString()));
+        channel.show();
+          
       });
-
+  
+    
+  //    window.registerTreeDataProvider('zap-sidebar', new r());  
     }
-  );
 
+  
+  ); 
+  
   let disposable = vscode.commands.registerCommand(
     "extention.zap",
     function (script) {
