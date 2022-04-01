@@ -13,7 +13,7 @@
   "activationEvents": [
     "onCommand:extention.zap",
     "onCommand:extention.zapopenPackageJsonFile",
-    "workspaceContains:.editorconfig",
+    "workspaceContains:**/*.zap",
     "onView:zapsidebar"
   ],
   "enabledApiProposals": [
@@ -22,11 +22,6 @@
   "main": "./extension.js",
   "contributes": {
     "commands": [
-      {
-        "command": "extention.zap",
-        "title": "zap:run script",
-        "icon": "zap.svg"
-      },
       {
         "command": "extention.zapopenPackageJsonFile",
         "title": "zap:load script json",
@@ -40,13 +35,6 @@
           "title": "Zap",
           "icon": "zap.svg"
         }
-      ],
-      "panel": [
-        {
-          "id": "zapextension",
-          "title": "HI This is a Panel",
-          "icon": "zap.svg"
-        } 
       ]
     },
     "views": {
@@ -73,6 +61,16 @@
             "type": "string",
             "default": "",
             "description": "Specifies the location of json file or folder that contains package.json."
+          }
+        }
+      },
+      {
+        "title": "zap server address",
+        "properties": {
+          "zap.serverAddress": {
+            "type": "string",
+            "default": "http://localhost:9070",
+            "description": "specify the url which zap server is serving"
           }
         }
       }
