@@ -14,7 +14,7 @@
     "onCommand:extention.zap",
     "onCommand:extention.zapopenPackageJsonFile",
     "workspaceContains:**/*.zap",
-    "onView:zapsidebar"
+    "onView:zapscriptsview"
   ],
   "enabledApiProposals": [
     "contribViewsWelcome"
@@ -40,19 +40,12 @@
     "views": {
       "zapextension": [
         {
-          "id": "zapscripts",
+          "type": "webview",
+          "id": "zapscriptsview",
           "name": "Scripts"
-          
-
         }
       ]
     },
-    "viewsWelcome": [
-      {
-        "view": "zapscripts",
-        "contents": "Scripts:"
-      }
-    ],
     "configuration": [
       {
         "title": "zap",
@@ -69,7 +62,7 @@
         "properties": {
           "zap.serverAddress": {
             "type": "string",
-            "default": "http://localhost:9070",
+            "default": "http://localhost:9070?zapfile=/zapfile.zap",
             "description": "specify the url which zap server is serving"
           }
         }

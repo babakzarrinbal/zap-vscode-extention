@@ -14,7 +14,70 @@ const p = require("path");
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+  // implementing webview for the extension
+  var thisProvider = {
+    resolveWebviewView: function (thisWebview, thisWebviewContext, thisToke) {
+      thisWebview.webview.options = {
+        enableScripts: true,
+        enableCommandUris: true,
+      };
+      thisWebview.webview.html = `<!doctype><html>
+      <head>
+        <script>
+        btnClick = function(){
+          vscode.sendMessage("Hello from the webview!");
+        }
+        </script>
+      </head>
+      <body>
+      <div id="root">
+      <div style="display:flex;flex-direction:column;">
+      <div class="row" style="display:flex;flex-direction:row">
+      <label style="flex-grow:1">zap-server</label>
+      <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" checked>  
+     
+      </div>
+      <div class="row" style="display:flex;flex-direction:row">
+      <label style="flex-grow:1">zap-devserver</label>
+      <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" checked>  
+     
+      </div>
+      <div class="row" style="display:flex;flex-direction:row">
+      <label style="flex-grow:1">zap-dev</label>
+      <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" checked>  
+     
+      </div>
+      <div class="row" style="display:flex;flex-direction:row">
+      <label style="flex-grow:1">build</label>
+      <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" checked>  
+     
+      </div>
+      <div class="row" style="display:flex;flex-direction:row">
+      <label style="flex-grow:1">test</label>
+      <input type="checkbox" id="checkbox" name="checkbox" value="checkbox" checked>  
+     
+      </div>
+      <div class="row" style="display:flex;flex-direction:row">
+      <button id="btn" type="button" onclick="btnClick()">change zap folder</button>
+      </div>
+      </div>
+      </div>
+      </body>  
+      </html>`;
+      // thisWebview.onDidReceiveMessage((message) => {
+      //   console.log(message);
+      // });
+    },
+  };
+  const webview = vscode.window.registerWebviewViewProvider(
+    "zapscriptsview",
+    thisProvider
+  );
+  // vscode.messa;
+  // @ts-ignore
 
+  setInterval(() => {}, 3000);
+  context.subscriptions.push(webview);
   vscode.window.showInformationMessage("zap Extention activated! ");
 
   let getconfig = vscode.commands.registerCommand(
@@ -45,7 +108,6 @@ function activate(context) {
         });
       }
 
-      
       window.showQuickPick(items).then((selection) => {
         // the user canceled the selection
         window.showInformationMessage("running commands: ", selection.label);
@@ -56,7 +118,10 @@ function activate(context) {
           shell: true,
           cwd: path,
         });
-        vscode.commands.executeCommand("simpleBrowser.show",workspace.getConfiguration("zap").get("serverAddress"))
+        vscode.commands.executeCommand(
+          "simpleBrowser.show",
+          workspace.getConfiguration("zap").get("serverAddress")
+        );
 
         runningcommand.stdout.setEncoding("utf8");
         runningcommand.stdout.on("data", (m) => {
@@ -97,4 +162,3 @@ module.exports = {
   activate,
   deactivate,
 };
-
